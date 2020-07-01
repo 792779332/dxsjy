@@ -32,9 +32,14 @@ public class lianxi {
     @GetMapping("/findall")
     @ApiOperation("查询所有用户")
     public Message<List<User>> finduser(){
+
         List<User> list=userService.FindAllUser();
+
         return MessageUtil.success(list);
     }
+
+    //hgfcfhvfcbvbghhbghhggjjk
+    //gfgjhkjk
 
 
 }
