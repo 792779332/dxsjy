@@ -4,7 +4,7 @@ package com.example.dxsjy.Util;
  * @program: app01
  * @description: 消息类
  * @author: charles
- * @create: 2019-03-13 20:58
+ * @Create:2020年7月1日08:31:16
  **/
 
 public class Message<T> {

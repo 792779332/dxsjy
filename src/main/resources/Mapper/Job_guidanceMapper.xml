@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.dxsjy.Mapper.UserMapper">
-  <resultMap id="BaseResultMap" type="com.example.dxsjy.Bean.User">
+<mapper namespace="com.example.dxsjy.Mapper.Job_guidanceMapper">
+  <resultMap id="BaseResultMap" type="com.example.dxsjy.Bean.Job_guidance">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="password" jdbcType="INTEGER" property="password" />
-    <result column="type" jdbcType="VARCHAR" property="type" />
-    <result column="date" jdbcType="TIMESTAMP" property="date" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.example.dxsjy.Bean.Job_guidance">
+    <result column="data" jdbcType="LONGVARCHAR" property="data" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -67,15 +68,20 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, password, type, date
+    id, title, time
   </sql>
-  <select id="selectByExample" parameterType="com.example.dxsjy.Bean.UserExample" resultMap="BaseResultMap">
+  <sql id="Blob_Column_List">
+    data
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.example.dxsjy.Bean.Job_guidanceExample" resultMap="ResultMapWithBLOBs">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from user_info
+    ,
+    <include refid="Blob_Column_List" />
+    from job_guidance
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -83,129 +89,146 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.example.dxsjy.Bean.Job_guidanceExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from job_guidance
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
-    from user_info
+    ,
+    <include refid="Blob_Column_List" />
+    from job_guidance
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from user_info
+    delete from job_guidance
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.example.dxsjy.Bean.UserExample">
-    delete from user_info
+  <delete id="deleteByExample" parameterType="com.example.dxsjy.Bean.Job_guidanceExample">
+    delete from job_guidance
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.example.dxsjy.Bean.User">
-    insert into user_info (id, name, password, 
-      type, date)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=INTEGER}, 
-      #{type,jdbcType=VARCHAR}, #{date,jdbcType=TIMESTAMP})
+  <insert id="insert" parameterType="com.example.dxsjy.Bean.Job_guidance">
+    insert into job_guidance (id, title, time, 
+      data)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, 
+      #{data,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.example.dxsjy.Bean.User">
-    insert into user_info
+  <insert id="insertSelective" parameterType="com.example.dxsjy.Bean.Job_guidance">
+    insert into job_guidance
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="name != null">
-        name,
+      <if test="title != null">
+        title,
       </if>
-      <if test="password != null">
-        password,
+      <if test="time != null">
+        time,
       </if>
-      <if test="type != null">
-        type,
-      </if>
-      <if test="date != null">
-        date,
+      <if test="data != null">
+        data,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
       </if>
-      <if test="password != null">
-        #{password,jdbcType=INTEGER},
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
       </if>
-      <if test="type != null">
-        #{type,jdbcType=VARCHAR},
-      </if>
-      <if test="date != null">
-        #{date,jdbcType=TIMESTAMP},
+      <if test="data != null">
+        #{data,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.example.dxsjy.Bean.UserExample" resultType="java.lang.Long">
-    select count(*) from user_info
+  <select id="countByExample" parameterType="com.example.dxsjy.Bean.Job_guidanceExample" resultType="java.lang.Long">
+    select count(*) from job_guidance
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update user_info
+    update job_guidance
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.name != null">
-        name = #{record.name,jdbcType=VARCHAR},
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
       </if>
-      <if test="record.password != null">
-        password = #{record.password,jdbcType=INTEGER},
+      <if test="record.time != null">
+        time = #{record.time,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.type != null">
-        type = #{record.type,jdbcType=VARCHAR},
-      </if>
-      <if test="record.date != null">
-        date = #{record.date,jdbcType=TIMESTAMP},
+      <if test="record.data != null">
+        data = #{record.data,jdbcType=LONGVARCHAR},
       </if>
     </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update job_guidance
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      time = #{record.time,jdbcType=TIMESTAMP},
+      data = #{record.data,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update user_info
+    update job_guidance
     set id = #{record.id,jdbcType=INTEGER},
-      name = #{record.name,jdbcType=VARCHAR},
-      password = #{record.password,jdbcType=INTEGER},
-      type = #{record.type,jdbcType=VARCHAR},
-      date = #{record.date,jdbcType=TIMESTAMP}
+      title = #{record.title,jdbcType=VARCHAR},
+      time = #{record.time,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.dxsjy.Bean.User">
-    update user_info
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.dxsjy.Bean.Job_guidance">
+    update job_guidance
     <set>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
       </if>
-      <if test="password != null">
-        password = #{password,jdbcType=INTEGER},
+      <if test="time != null">
+        time = #{time,jdbcType=TIMESTAMP},
       </if>
-      <if test="type != null">
-        type = #{type,jdbcType=VARCHAR},
-      </if>
-      <if test="date != null">
-        date = #{date,jdbcType=TIMESTAMP},
+      <if test="data != null">
+        data = #{data,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.dxsjy.Bean.User">
-    update user_info
-    set name = #{name,jdbcType=VARCHAR},
-      password = #{password,jdbcType=INTEGER},
-      type = #{type,jdbcType=VARCHAR},
-      date = #{date,jdbcType=TIMESTAMP}
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.dxsjy.Bean.Job_guidance">
+    update job_guidance
+    set title = #{title,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP},
+      data = #{data,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.dxsjy.Bean.Job_guidance">
+    update job_guidance
+    set title = #{title,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

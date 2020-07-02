@@ -18,7 +18,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public List<User> FindAllUser() throws RuntimeException {
-        UserExample userExample=new UserExample();
+        UserExample userExample = new UserExample();
 
         List<User> list =userMapper.selectByExample(userExample);
 

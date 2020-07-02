@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dxsjy.Mapper.BusinessMapper">
+  <resultMap id="BaseResultMap" type="com.example.dxsjy.Bean.Business">
+    <id column="b_id" jdbcType="INTEGER" property="bId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="b_name" jdbcType="VARCHAR" property="bName" />
+    <result column="b_address" jdbcType="VARCHAR" property="bAddress" />
+    <result column="b_tel" jdbcType="VARCHAR" property="bTel" />
+    <result column="b_people" jdbcType="VARCHAR" property="bPeople" />
+    <result column="b_email" jdbcType="VARCHAR" property="bEmail" />
+    <result column="b_website" jdbcType="VARCHAR" property="bWebsite" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    b_id, user_id, b_name, b_address, b_tel, b_people, b_email, b_website
+  </sql>
+  <select id="selectByExample" parameterType="com.example.dxsjy.Bean.BusinessExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from business_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from business_info
+    where b_id = #{bId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from business_info
+    where b_id = #{bId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.dxsjy.Bean.BusinessExample">
+    delete from business_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.dxsjy.Bean.Business">
+    insert into business_info (b_id, user_id, b_name, 
+      b_address, b_tel, b_people, 
+      b_email, b_website)
+    values (#{bId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{bName,jdbcType=VARCHAR}, 
+      #{bAddress,jdbcType=VARCHAR}, #{bTel,jdbcType=VARCHAR}, #{bPeople,jdbcType=VARCHAR}, 
+      #{bEmail,jdbcType=VARCHAR}, #{bWebsite,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.dxsjy.Bean.Business">
+    insert into business_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bId != null">
+        b_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="bName != null">
+        b_name,
+      </if>
+      <if test="bAddress != null">
+        b_address,
+      </if>
+      <if test="bTel != null">
+        b_tel,
+      </if>
+      <if test="bPeople != null">
+        b_people,
+      </if>
+      <if test="bEmail != null">
+        b_email,
+      </if>
+      <if test="bWebsite != null">
+        b_website,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bId != null">
+        #{bId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="bName != null">
+        #{bName,jdbcType=VARCHAR},
+      </if>
+      <if test="bAddress != null">
+        #{bAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="bTel != null">
+        #{bTel,jdbcType=VARCHAR},
+      </if>
+      <if test="bPeople != null">
+        #{bPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="bEmail != null">
+        #{bEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="bWebsite != null">
+        #{bWebsite,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.dxsjy.Bean.BusinessExample" resultType="java.lang.Long">
+    select count(*) from business_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update business_info
+    <set>
+      <if test="record.bId != null">
+        b_id = #{record.bId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.bName != null">
+        b_name = #{record.bName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bAddress != null">
+        b_address = #{record.bAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bTel != null">
+        b_tel = #{record.bTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bPeople != null">
+        b_people = #{record.bPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bEmail != null">
+        b_email = #{record.bEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bWebsite != null">
+        b_website = #{record.bWebsite,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update business_info
+    set b_id = #{record.bId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      b_name = #{record.bName,jdbcType=VARCHAR},
+      b_address = #{record.bAddress,jdbcType=VARCHAR},
+      b_tel = #{record.bTel,jdbcType=VARCHAR},
+      b_people = #{record.bPeople,jdbcType=VARCHAR},
+      b_email = #{record.bEmail,jdbcType=VARCHAR},
+      b_website = #{record.bWebsite,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.dxsjy.Bean.Business">
+    update business_info
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="bName != null">
+        b_name = #{bName,jdbcType=VARCHAR},
+      </if>
+      <if test="bAddress != null">
+        b_address = #{bAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="bTel != null">
+        b_tel = #{bTel,jdbcType=VARCHAR},
+      </if>
+      <if test="bPeople != null">
+        b_people = #{bPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="bEmail != null">
+        b_email = #{bEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="bWebsite != null">
+        b_website = #{bWebsite,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where b_id = #{bId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.dxsjy.Bean.Business">
+    update business_info
+    set user_id = #{userId,jdbcType=INTEGER},
+      b_name = #{bName,jdbcType=VARCHAR},
+      b_address = #{bAddress,jdbcType=VARCHAR},
+      b_tel = #{bTel,jdbcType=VARCHAR},
+      b_people = #{bPeople,jdbcType=VARCHAR},
+      b_email = #{bEmail,jdbcType=VARCHAR},
+      b_website = #{bWebsite,jdbcType=VARCHAR}
+    where b_id = #{bId,jdbcType=INTEGER}
+  </update>
+</mapper>

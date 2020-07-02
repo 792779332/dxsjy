@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dxsjy.Mapper.RecruitmentMapper">
+  <resultMap id="BaseResultMap" type="com.example.dxsjy.Bean.Recruitment">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="b_id" jdbcType="INTEGER" property="bId" />
+    <result column="job_name" jdbcType="VARCHAR" property="jobName" />
+    <result column="work_address" jdbcType="VARCHAR" property="workAddress" />
+    <result column="rec_number" jdbcType="INTEGER" property="recNumber" />
+    <result column="salary" jdbcType="REAL" property="salary" />
+    <result column="closing date" jdbcType="DATE" property="closingDate" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.example.dxsjy.Bean.RecruitmentWithBLOBs">
+    <result column="job_requirement" jdbcType="LONGVARCHAR" property="jobRequirement" />
+    <result column="Other treatment" jdbcType="LONGVARCHAR" property="otherTreatment" />
+    <result column="remarks" jdbcType="LONGVARCHAR" property="remarks" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, b_id, job_name, work_address, rec_number, salary, "closing date"
+  </sql>
+  <sql id="Blob_Column_List">
+    job_requirement, "Other treatment", remarks
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.example.dxsjy.Bean.RecruitmentExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from recruitment_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.example.dxsjy.Bean.RecruitmentExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from recruitment_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from recruitment_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from recruitment_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.dxsjy.Bean.RecruitmentExample">
+    delete from recruitment_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.dxsjy.Bean.RecruitmentWithBLOBs">
+    insert into recruitment_info (id, b_id, job_name, 
+      work_address, rec_number, salary, 
+      "closing date", job_requirement, "Other treatment", 
+      remarks)
+    values (#{id,jdbcType=INTEGER}, #{bId,jdbcType=INTEGER}, #{jobName,jdbcType=VARCHAR}, 
+      #{workAddress,jdbcType=VARCHAR}, #{recNumber,jdbcType=INTEGER}, #{salary,jdbcType=REAL}, 
+      #{closingDate,jdbcType=DATE}, #{jobRequirement,jdbcType=LONGVARCHAR}, #{otherTreatment,jdbcType=LONGVARCHAR}, 
+      #{remarks,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.dxsjy.Bean.RecruitmentWithBLOBs">
+    insert into recruitment_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="bId != null">
+        b_id,
+      </if>
+      <if test="jobName != null">
+        job_name,
+      </if>
+      <if test="workAddress != null">
+        work_address,
+      </if>
+      <if test="recNumber != null">
+        rec_number,
+      </if>
+      <if test="salary != null">
+        salary,
+      </if>
+      <if test="closingDate != null">
+        "closing date",
+      </if>
+      <if test="jobRequirement != null">
+        job_requirement,
+      </if>
+      <if test="otherTreatment != null">
+        "Other treatment",
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="bId != null">
+        #{bId,jdbcType=INTEGER},
+      </if>
+      <if test="jobName != null">
+        #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="workAddress != null">
+        #{workAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="recNumber != null">
+        #{recNumber,jdbcType=INTEGER},
+      </if>
+      <if test="salary != null">
+        #{salary,jdbcType=REAL},
+      </if>
+      <if test="closingDate != null">
+        #{closingDate,jdbcType=DATE},
+      </if>
+      <if test="jobRequirement != null">
+        #{jobRequirement,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="otherTreatment != null">
+        #{otherTreatment,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.dxsjy.Bean.RecruitmentExample" resultType="java.lang.Long">
+    select count(*) from recruitment_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update recruitment_info
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.bId != null">
+        b_id = #{record.bId,jdbcType=INTEGER},
+      </if>
+      <if test="record.jobName != null">
+        job_name = #{record.jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workAddress != null">
+        work_address = #{record.workAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recNumber != null">
+        rec_number = #{record.recNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.salary != null">
+        salary = #{record.salary,jdbcType=REAL},
+      </if>
+      <if test="record.closingDate != null">
+        "closing date" = #{record.closingDate,jdbcType=DATE},
+      </if>
+      <if test="record.jobRequirement != null">
+        job_requirement = #{record.jobRequirement,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.otherTreatment != null">
+        "Other treatment" = #{record.otherTreatment,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update recruitment_info
+    set id = #{record.id,jdbcType=INTEGER},
+      b_id = #{record.bId,jdbcType=INTEGER},
+      job_name = #{record.jobName,jdbcType=VARCHAR},
+      work_address = #{record.workAddress,jdbcType=VARCHAR},
+      rec_number = #{record.recNumber,jdbcType=INTEGER},
+      salary = #{record.salary,jdbcType=REAL},
+      "closing date" = #{record.closingDate,jdbcType=DATE},
+      job_requirement = #{record.jobRequirement,jdbcType=LONGVARCHAR},
+      "Other treatment" = #{record.otherTreatment,jdbcType=LONGVARCHAR},
+      remarks = #{record.remarks,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update recruitment_info
+    set id = #{record.id,jdbcType=INTEGER},
+      b_id = #{record.bId,jdbcType=INTEGER},
+      job_name = #{record.jobName,jdbcType=VARCHAR},
+      work_address = #{record.workAddress,jdbcType=VARCHAR},
+      rec_number = #{record.recNumber,jdbcType=INTEGER},
+      salary = #{record.salary,jdbcType=REAL},
+      "closing date" = #{record.closingDate,jdbcType=DATE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.dxsjy.Bean.RecruitmentWithBLOBs">
+    update recruitment_info
+    <set>
+      <if test="bId != null">
+        b_id = #{bId,jdbcType=INTEGER},
+      </if>
+      <if test="jobName != null">
+        job_name = #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="workAddress != null">
+        work_address = #{workAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="recNumber != null">
+        rec_number = #{recNumber,jdbcType=INTEGER},
+      </if>
+      <if test="salary != null">
+        salary = #{salary,jdbcType=REAL},
+      </if>
+      <if test="closingDate != null">
+        "closing date" = #{closingDate,jdbcType=DATE},
+      </if>
+      <if test="jobRequirement != null">
+        job_requirement = #{jobRequirement,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="otherTreatment != null">
+        "Other treatment" = #{otherTreatment,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.dxsjy.Bean.RecruitmentWithBLOBs">
+    update recruitment_info
+    set b_id = #{bId,jdbcType=INTEGER},
+      job_name = #{jobName,jdbcType=VARCHAR},
+      work_address = #{workAddress,jdbcType=VARCHAR},
+      rec_number = #{recNumber,jdbcType=INTEGER},
+      salary = #{salary,jdbcType=REAL},
+      "closing date" = #{closingDate,jdbcType=DATE},
+      job_requirement = #{jobRequirement,jdbcType=LONGVARCHAR},
+      "Other treatment" = #{otherTreatment,jdbcType=LONGVARCHAR},
+      remarks = #{remarks,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.dxsjy.Bean.Recruitment">
+    update recruitment_info
+    set b_id = #{bId,jdbcType=INTEGER},
+      job_name = #{jobName,jdbcType=VARCHAR},
+      work_address = #{workAddress,jdbcType=VARCHAR},
+      rec_number = #{recNumber,jdbcType=INTEGER},
+      salary = #{salary,jdbcType=REAL},
+      "closing date" = #{closingDate,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

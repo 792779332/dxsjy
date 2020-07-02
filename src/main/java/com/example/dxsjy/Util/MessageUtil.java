@@ -6,7 +6,7 @@ import java.util.Date;
  * @program: app01
  * @description: 消息工具
  * @author: charles
- * @create: 2019-03-13 21:01
+ * @create: 2020年7月1日08:32:12
  **/
 
 public class MessageUtil {
