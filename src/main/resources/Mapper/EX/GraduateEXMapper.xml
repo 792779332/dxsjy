@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dxsjy.Mapper.EX.GraduateEXMapper">
+    <resultMap id="aaa" type="com.example.dxsjy.Bean.EX.GraduateEX">
+        <id column="s_id" property="sId"></id>
+        <result column="user_id1" property="userId1"></result>
+        <result column="sname" property="sname"></result>
+        <result column="ssex" property="ssex"></result>
+        <result column="country" property="country"></result>
+        <result column="birth" property="birth"></result>
+        <result column="marital_status" property="maritalStatus"></result>
+        <result column="height" property="height"></result>
+        <result column="ID" property="id"></result>
+        <result column="native_place" property="nativePlace"></result>
+        <result column="tel" property="tel"></result>
+        <result column="QQ" property="qq"></result>
+        <result column="e-mail" property="eMail"></result>
+        <result column="postal_code" property="postalCode"></result>
+        <result column="address" property="address"></result>
+        <result column="self-assessment" property="selfAssessment"></result>
+        <result column="graduate_institutions" property="graduateInstitutions"></result>
+        <result column="major" property="major"></result>
+        <result column="degree" property="degree"></result>
+        <result column="rank" property="rank"></result>
+        <result column="first_foreign_languages" property="firstForeignLanguages"></result>
+        <result column="first_level" property="firstLevel"></result>
+        <result column="second_foreign_languages" property="secondForeignLanguages"></result>
+        <result column="second_level" property="secondLevel"></result>
+        <result column="remark" property="remark"></result>
+
+        <collection property="graduate_record"
+                    column="sId"
+                    select="selectRecord"
+                    ofType="com.example.dxsjy.Bean.Graduate_record">
+
+        </collection>
+
+        <collection property="graduate_work"
+                    column="sId"
+                    select="selectWork"
+                    ofType="com.example.dxsjy.Bean.Graduate_work">
+
+        </collection>
+    </resultMap>
+    <select id="selectRecord" resultType="com.example.dxsjy.Bean.Graduate_record">
+        select * from graduate_record where graduate_id1 = #{sId}
+    </select>
+    <select id="selectWork" resultType="com.example.dxsjy.Bean.Graduate_work">
+        select * from graduate_work_info where graduate_id = #{sId}
+    </select>
+    <select id="findAll" resultMap="aaa">
+        select * from graduate_info
+    </select>
+</mapper>
