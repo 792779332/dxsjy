@@ -50,8 +50,13 @@
 
 
 		<!-- 映射配置 -->
-		<table tableName="user" domainObjectName="User"></table>
-		<table tableName="name" domainObjectName="Name"></table>
+		<table tableName="user_info" domainObjectName="User"></table>
+		<table tableName="business_info" domainObjectName="Business"></table>
+		<table tableName="graduate_info" domainObjectName="Graduate"></table>
+		<table tableName="graduate_record" domainObjectName="Graduate_record"></table>
+		<table tableName="graduate_work_info" domainObjectName="Graduate_work"></table>
+		<table tableName="job_guidance" domainObjectName="Job_guidance"></table>
+		<table tableName="recruitment_info" domainObjectName="Recruitment"></table>
 
 	</context>
 </generatorConfiguration>

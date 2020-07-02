@@ -38,8 +38,4 @@ public class lianxi {
         return MessageUtil.success(list);
     }
 
-    //hgfcfhvfcbvbghhbghhggjjk
-    //gfgjhkjk
-
-
 }

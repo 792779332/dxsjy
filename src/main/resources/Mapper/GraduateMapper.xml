@@ -1,0 +1,605 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dxsjy.Mapper.GraduateMapper">
+  <resultMap id="BaseResultMap" type="com.example.dxsjy.Bean.Graduate">
+    <id column="s_id" jdbcType="INTEGER" property="sId" />
+    <result column="user_id1" jdbcType="INTEGER" property="userId1" />
+    <result column="sname" jdbcType="VARCHAR" property="sname" />
+    <result column="ssex" jdbcType="CHAR" property="ssex" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="birth" jdbcType="DATE" property="birth" />
+    <result column="marital_status" jdbcType="VARCHAR" property="maritalStatus" />
+    <result column="height" jdbcType="INTEGER" property="height" />
+    <result column="ID" jdbcType="INTEGER" property="id" />
+    <result column="native_place" jdbcType="VARCHAR" property="nativePlace" />
+    <result column="tel" jdbcType="INTEGER" property="tel" />
+    <result column="QQ" jdbcType="INTEGER" property="qq" />
+    <result column="e-mail" jdbcType="VARCHAR" property="eMail" />
+    <result column="postal_code" jdbcType="INTEGER" property="postalCode" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="self-assessment" jdbcType="VARCHAR" property="selfAssessment" />
+    <result column="graduate_institutions" jdbcType="VARCHAR" property="graduateInstitutions" />
+    <result column="major" jdbcType="VARCHAR" property="major" />
+    <result column="degree" jdbcType="VARCHAR" property="degree" />
+    <result column="rank" jdbcType="CHAR" property="rank" />
+    <result column="first_foreign_languages" jdbcType="VARCHAR" property="firstForeignLanguages" />
+    <result column="first_level" jdbcType="CHAR" property="firstLevel" />
+    <result column="second_foreign_languages" jdbcType="VARCHAR" property="secondForeignLanguages" />
+    <result column="second_level" jdbcType="CHAR" property="secondLevel" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.example.dxsjy.Bean.Graduate">
+    <result column="remark" jdbcType="LONGVARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    s_id, user_id1, sname, ssex, country, birth, marital_status, height, ID, native_place, 
+    tel, QQ, e-mail, postal_code, address, self-assessment, graduate_institutions, major, 
+    degree, rank, first_foreign_languages, first_level, second_foreign_languages, second_level
+  </sql>
+  <sql id="Blob_Column_List">
+    remark
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.example.dxsjy.Bean.GraduateExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from graduate_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.example.dxsjy.Bean.GraduateExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from graduate_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from graduate_info
+    where s_id = #{sId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from graduate_info
+    where s_id = #{sId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.dxsjy.Bean.GraduateExample">
+    delete from graduate_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.dxsjy.Bean.Graduate">
+    insert into graduate_info (s_id, user_id1, sname, 
+      ssex, country, birth, marital_status, 
+      height, ID, native_place, 
+      tel, QQ, e-mail, postal_code, 
+      address, self-assessment, graduate_institutions, 
+      major, degree, rank, first_foreign_languages, 
+      first_level, second_foreign_languages, second_level, 
+      remark)
+    values (#{sId,jdbcType=INTEGER}, #{userId1,jdbcType=INTEGER}, #{sname,jdbcType=VARCHAR}, 
+      #{ssex,jdbcType=CHAR}, #{country,jdbcType=VARCHAR}, #{birth,jdbcType=DATE}, #{maritalStatus,jdbcType=VARCHAR}, 
+      #{height,jdbcType=INTEGER}, #{id,jdbcType=INTEGER}, #{nativePlace,jdbcType=VARCHAR}, 
+      #{tel,jdbcType=INTEGER}, #{qq,jdbcType=INTEGER}, #{eMail,jdbcType=VARCHAR}, #{postalCode,jdbcType=INTEGER}, 
+      #{address,jdbcType=VARCHAR}, #{selfAssessment,jdbcType=VARCHAR}, #{graduateInstitutions,jdbcType=VARCHAR}, 
+      #{major,jdbcType=VARCHAR}, #{degree,jdbcType=VARCHAR}, #{rank,jdbcType=CHAR}, #{firstForeignLanguages,jdbcType=VARCHAR}, 
+      #{firstLevel,jdbcType=CHAR}, #{secondForeignLanguages,jdbcType=VARCHAR}, #{secondLevel,jdbcType=CHAR}, 
+      #{remark,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.dxsjy.Bean.Graduate">
+    insert into graduate_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sId != null">
+        s_id,
+      </if>
+      <if test="userId1 != null">
+        user_id1,
+      </if>
+      <if test="sname != null">
+        sname,
+      </if>
+      <if test="ssex != null">
+        ssex,
+      </if>
+      <if test="country != null">
+        country,
+      </if>
+      <if test="birth != null">
+        birth,
+      </if>
+      <if test="maritalStatus != null">
+        marital_status,
+      </if>
+      <if test="height != null">
+        height,
+      </if>
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="nativePlace != null">
+        native_place,
+      </if>
+      <if test="tel != null">
+        tel,
+      </if>
+      <if test="qq != null">
+        QQ,
+      </if>
+      <if test="eMail != null">
+        e-mail,
+      </if>
+      <if test="postalCode != null">
+        postal_code,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="selfAssessment != null">
+        self-assessment,
+      </if>
+      <if test="graduateInstitutions != null">
+        graduate_institutions,
+      </if>
+      <if test="major != null">
+        major,
+      </if>
+      <if test="degree != null">
+        degree,
+      </if>
+      <if test="rank != null">
+        rank,
+      </if>
+      <if test="firstForeignLanguages != null">
+        first_foreign_languages,
+      </if>
+      <if test="firstLevel != null">
+        first_level,
+      </if>
+      <if test="secondForeignLanguages != null">
+        second_foreign_languages,
+      </if>
+      <if test="secondLevel != null">
+        second_level,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sId != null">
+        #{sId,jdbcType=INTEGER},
+      </if>
+      <if test="userId1 != null">
+        #{userId1,jdbcType=INTEGER},
+      </if>
+      <if test="sname != null">
+        #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="ssex != null">
+        #{ssex,jdbcType=CHAR},
+      </if>
+      <if test="country != null">
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="birth != null">
+        #{birth,jdbcType=DATE},
+      </if>
+      <if test="maritalStatus != null">
+        #{maritalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null">
+        #{height,jdbcType=INTEGER},
+      </if>
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="nativePlace != null">
+        #{nativePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        #{tel,jdbcType=INTEGER},
+      </if>
+      <if test="qq != null">
+        #{qq,jdbcType=INTEGER},
+      </if>
+      <if test="eMail != null">
+        #{eMail,jdbcType=VARCHAR},
+      </if>
+      <if test="postalCode != null">
+        #{postalCode,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="selfAssessment != null">
+        #{selfAssessment,jdbcType=VARCHAR},
+      </if>
+      <if test="graduateInstitutions != null">
+        #{graduateInstitutions,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null">
+        #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null">
+        #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="rank != null">
+        #{rank,jdbcType=CHAR},
+      </if>
+      <if test="firstForeignLanguages != null">
+        #{firstForeignLanguages,jdbcType=VARCHAR},
+      </if>
+      <if test="firstLevel != null">
+        #{firstLevel,jdbcType=CHAR},
+      </if>
+      <if test="secondForeignLanguages != null">
+        #{secondForeignLanguages,jdbcType=VARCHAR},
+      </if>
+      <if test="secondLevel != null">
+        #{secondLevel,jdbcType=CHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.dxsjy.Bean.GraduateExample" resultType="java.lang.Long">
+    select count(*) from graduate_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update graduate_info
+    <set>
+      <if test="record.sId != null">
+        s_id = #{record.sId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId1 != null">
+        user_id1 = #{record.userId1,jdbcType=INTEGER},
+      </if>
+      <if test="record.sname != null">
+        sname = #{record.sname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ssex != null">
+        ssex = #{record.ssex,jdbcType=CHAR},
+      </if>
+      <if test="record.country != null">
+        country = #{record.country,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birth != null">
+        birth = #{record.birth,jdbcType=DATE},
+      </if>
+      <if test="record.maritalStatus != null">
+        marital_status = #{record.maritalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.height != null">
+        height = #{record.height,jdbcType=INTEGER},
+      </if>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.nativePlace != null">
+        native_place = #{record.nativePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tel != null">
+        tel = #{record.tel,jdbcType=INTEGER},
+      </if>
+      <if test="record.qq != null">
+        QQ = #{record.qq,jdbcType=INTEGER},
+      </if>
+      <if test="record.eMail != null">
+        e-mail = #{record.eMail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postalCode != null">
+        postal_code = #{record.postalCode,jdbcType=INTEGER},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.selfAssessment != null">
+        self-assessment = #{record.selfAssessment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.graduateInstitutions != null">
+        graduate_institutions = #{record.graduateInstitutions,jdbcType=VARCHAR},
+      </if>
+      <if test="record.major != null">
+        major = #{record.major,jdbcType=VARCHAR},
+      </if>
+      <if test="record.degree != null">
+        degree = #{record.degree,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rank != null">
+        rank = #{record.rank,jdbcType=CHAR},
+      </if>
+      <if test="record.firstForeignLanguages != null">
+        first_foreign_languages = #{record.firstForeignLanguages,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstLevel != null">
+        first_level = #{record.firstLevel,jdbcType=CHAR},
+      </if>
+      <if test="record.secondForeignLanguages != null">
+        second_foreign_languages = #{record.secondForeignLanguages,jdbcType=VARCHAR},
+      </if>
+      <if test="record.secondLevel != null">
+        second_level = #{record.secondLevel,jdbcType=CHAR},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update graduate_info
+    set s_id = #{record.sId,jdbcType=INTEGER},
+      user_id1 = #{record.userId1,jdbcType=INTEGER},
+      sname = #{record.sname,jdbcType=VARCHAR},
+      ssex = #{record.ssex,jdbcType=CHAR},
+      country = #{record.country,jdbcType=VARCHAR},
+      birth = #{record.birth,jdbcType=DATE},
+      marital_status = #{record.maritalStatus,jdbcType=VARCHAR},
+      height = #{record.height,jdbcType=INTEGER},
+      ID = #{record.id,jdbcType=INTEGER},
+      native_place = #{record.nativePlace,jdbcType=VARCHAR},
+      tel = #{record.tel,jdbcType=INTEGER},
+      QQ = #{record.qq,jdbcType=INTEGER},
+      e-mail = #{record.eMail,jdbcType=VARCHAR},
+      postal_code = #{record.postalCode,jdbcType=INTEGER},
+      address = #{record.address,jdbcType=VARCHAR},
+      self-assessment = #{record.selfAssessment,jdbcType=VARCHAR},
+      graduate_institutions = #{record.graduateInstitutions,jdbcType=VARCHAR},
+      major = #{record.major,jdbcType=VARCHAR},
+      degree = #{record.degree,jdbcType=VARCHAR},
+      rank = #{record.rank,jdbcType=CHAR},
+      first_foreign_languages = #{record.firstForeignLanguages,jdbcType=VARCHAR},
+      first_level = #{record.firstLevel,jdbcType=CHAR},
+      second_foreign_languages = #{record.secondForeignLanguages,jdbcType=VARCHAR},
+      second_level = #{record.secondLevel,jdbcType=CHAR},
+      remark = #{record.remark,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update graduate_info
+    set s_id = #{record.sId,jdbcType=INTEGER},
+      user_id1 = #{record.userId1,jdbcType=INTEGER},
+      sname = #{record.sname,jdbcType=VARCHAR},
+      ssex = #{record.ssex,jdbcType=CHAR},
+      country = #{record.country,jdbcType=VARCHAR},
+      birth = #{record.birth,jdbcType=DATE},
+      marital_status = #{record.maritalStatus,jdbcType=VARCHAR},
+      height = #{record.height,jdbcType=INTEGER},
+      ID = #{record.id,jdbcType=INTEGER},
+      native_place = #{record.nativePlace,jdbcType=VARCHAR},
+      tel = #{record.tel,jdbcType=INTEGER},
+      QQ = #{record.qq,jdbcType=INTEGER},
+      e-mail = #{record.eMail,jdbcType=VARCHAR},
+      postal_code = #{record.postalCode,jdbcType=INTEGER},
+      address = #{record.address,jdbcType=VARCHAR},
+      self-assessment = #{record.selfAssessment,jdbcType=VARCHAR},
+      graduate_institutions = #{record.graduateInstitutions,jdbcType=VARCHAR},
+      major = #{record.major,jdbcType=VARCHAR},
+      degree = #{record.degree,jdbcType=VARCHAR},
+      rank = #{record.rank,jdbcType=CHAR},
+      first_foreign_languages = #{record.firstForeignLanguages,jdbcType=VARCHAR},
+      first_level = #{record.firstLevel,jdbcType=CHAR},
+      second_foreign_languages = #{record.secondForeignLanguages,jdbcType=VARCHAR},
+      second_level = #{record.secondLevel,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.dxsjy.Bean.Graduate">
+    update graduate_info
+    <set>
+      <if test="userId1 != null">
+        user_id1 = #{userId1,jdbcType=INTEGER},
+      </if>
+      <if test="sname != null">
+        sname = #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="ssex != null">
+        ssex = #{ssex,jdbcType=CHAR},
+      </if>
+      <if test="country != null">
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="birth != null">
+        birth = #{birth,jdbcType=DATE},
+      </if>
+      <if test="maritalStatus != null">
+        marital_status = #{maritalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null">
+        height = #{height,jdbcType=INTEGER},
+      </if>
+      <if test="id != null">
+        ID = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="nativePlace != null">
+        native_place = #{nativePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        tel = #{tel,jdbcType=INTEGER},
+      </if>
+      <if test="qq != null">
+        QQ = #{qq,jdbcType=INTEGER},
+      </if>
+      <if test="eMail != null">
+        e-mail = #{eMail,jdbcType=VARCHAR},
+      </if>
+      <if test="postalCode != null">
+        postal_code = #{postalCode,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="selfAssessment != null">
+        self-assessment = #{selfAssessment,jdbcType=VARCHAR},
+      </if>
+      <if test="graduateInstitutions != null">
+        graduate_institutions = #{graduateInstitutions,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null">
+        major = #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null">
+        degree = #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="rank != null">
+        rank = #{rank,jdbcType=CHAR},
+      </if>
+      <if test="firstForeignLanguages != null">
+        first_foreign_languages = #{firstForeignLanguages,jdbcType=VARCHAR},
+      </if>
+      <if test="firstLevel != null">
+        first_level = #{firstLevel,jdbcType=CHAR},
+      </if>
+      <if test="secondForeignLanguages != null">
+        second_foreign_languages = #{secondForeignLanguages,jdbcType=VARCHAR},
+      </if>
+      <if test="secondLevel != null">
+        second_level = #{secondLevel,jdbcType=CHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where s_id = #{sId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.dxsjy.Bean.Graduate">
+    update graduate_info
+    set user_id1 = #{userId1,jdbcType=INTEGER},
+      sname = #{sname,jdbcType=VARCHAR},
+      ssex = #{ssex,jdbcType=CHAR},
+      country = #{country,jdbcType=VARCHAR},
+      birth = #{birth,jdbcType=DATE},
+      marital_status = #{maritalStatus,jdbcType=VARCHAR},
+      height = #{height,jdbcType=INTEGER},
+      ID = #{id,jdbcType=INTEGER},
+      native_place = #{nativePlace,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=INTEGER},
+      QQ = #{qq,jdbcType=INTEGER},
+      e-mail = #{eMail,jdbcType=VARCHAR},
+      postal_code = #{postalCode,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      self-assessment = #{selfAssessment,jdbcType=VARCHAR},
+      graduate_institutions = #{graduateInstitutions,jdbcType=VARCHAR},
+      major = #{major,jdbcType=VARCHAR},
+      degree = #{degree,jdbcType=VARCHAR},
+      rank = #{rank,jdbcType=CHAR},
+      first_foreign_languages = #{firstForeignLanguages,jdbcType=VARCHAR},
+      first_level = #{firstLevel,jdbcType=CHAR},
+      second_foreign_languages = #{secondForeignLanguages,jdbcType=VARCHAR},
+      second_level = #{secondLevel,jdbcType=CHAR},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where s_id = #{sId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.dxsjy.Bean.Graduate">
+    update graduate_info
+    set user_id1 = #{userId1,jdbcType=INTEGER},
+      sname = #{sname,jdbcType=VARCHAR},
+      ssex = #{ssex,jdbcType=CHAR},
+      country = #{country,jdbcType=VARCHAR},
+      birth = #{birth,jdbcType=DATE},
+      marital_status = #{maritalStatus,jdbcType=VARCHAR},
+      height = #{height,jdbcType=INTEGER},
+      ID = #{id,jdbcType=INTEGER},
+      native_place = #{nativePlace,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=INTEGER},
+      QQ = #{qq,jdbcType=INTEGER},
+      e-mail = #{eMail,jdbcType=VARCHAR},
+      postal_code = #{postalCode,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      self-assessment = #{selfAssessment,jdbcType=VARCHAR},
+      graduate_institutions = #{graduateInstitutions,jdbcType=VARCHAR},
+      major = #{major,jdbcType=VARCHAR},
+      degree = #{degree,jdbcType=VARCHAR},
+      rank = #{rank,jdbcType=CHAR},
+      first_foreign_languages = #{firstForeignLanguages,jdbcType=VARCHAR},
+      first_level = #{firstLevel,jdbcType=CHAR},
+      second_foreign_languages = #{secondForeignLanguages,jdbcType=VARCHAR},
+      second_level = #{secondLevel,jdbcType=CHAR}
+    where s_id = #{sId,jdbcType=INTEGER}
+  </update>
+</mapper>
