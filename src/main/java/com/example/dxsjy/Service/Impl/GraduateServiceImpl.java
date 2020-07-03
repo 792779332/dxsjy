@@ -1,7 +1,6 @@
 package com.example.dxsjy.Service.Impl;
 
 import com.example.dxsjy.Bean.EX.GraduateEX;
-import com.example.dxsjy.Bean.Graduate;
 import com.example.dxsjy.Mapper.EX.GraduateEXMapper;
 import com.example.dxsjy.Service.IGraduateService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +17,4 @@ public class GraduateServiceImpl implements IGraduateService {
         List<GraduateEX> list = graduateEXMapper.findAll();
         return list;
     }
-
-
-
-
 }

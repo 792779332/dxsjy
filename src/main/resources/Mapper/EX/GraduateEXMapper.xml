@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.dxsjy.Mapper.EX.GraduateEXMapper">
-    <resultMap id="aaa" type="com.example.dxsjy.Bean.EX.GraduateEX">
+    <resultMap id="aaa" type="com.example.dxsjy.Bean.EX.GraduateEX">git
         <id column="s_id" property="sId"></id>
         <result column="user_id1" property="userId1"></result>
         <result column="sname" property="sname"></result>
@@ -29,24 +29,52 @@
         <result column="remark" property="remark"></result>
 
         <collection property="graduate_record"
-                    column="sId"
+                    column="s_id"
                     select="selectRecord"
                     ofType="com.example.dxsjy.Bean.Graduate_record">
 
         </collection>
 
         <collection property="graduate_work"
-                    column="sId"
+                    column="s_id"
                     select="selectWork"
                     ofType="com.example.dxsjy.Bean.Graduate_work">
 
         </collection>
     </resultMap>
-    <select id="selectRecord" resultType="com.example.dxsjy.Bean.Graduate_record">
-        select * from graduate_record where graduate_id1 = #{sId}
+
+    <resultMap id="bbb" type="com.example.dxsjy.Bean.Graduate_record">
+        <id column="id" property="id"></id>
+        <result column="graduate_id1" property="graduateId1"></result>
+        <result column="trainning" property="trainning"></result>
+        <result column="start_time" property="startTime"></result>
+        <result column="stop_time" property="stopTime"></result>
+        <result column="all_time" property="allTime"></result>
+        <result column="major" property="major"></result>
+        <result column="trainning_depart" property="trainningDepart"></result>
+        <result column="trainning_money" property="trainningMoney"></result>
+
+    </resultMap>
+
+    <resultMap id="ccc" type="com.example.dxsjy.Bean.Graduate_work">
+        <id column="id" property="id"></id>
+        <result column="graduate_id" property="graduateId"></result>
+        <result column="start_time" property="startTime"></result>
+        <result column="stop_time" property="stopTime"></result>
+        <result column="work_place" property="workPlace"></result>
+        <result column="department" property="department"></result>
+        <result column="job" property="job"></result>
+        <result column="rank" property="rank"></result>
+    </resultMap>
+
+
+
+
+    <select id="selectRecord" resultMap="bbb">
+        select * from graduate_record where graduate_id1 = #{s_id}
     </select>
-    <select id="selectWork" resultType="com.example.dxsjy.Bean.Graduate_work">
-        select * from graduate_work_info where graduate_id = #{sId}
+    <select id="selectWork" resultMap="ccc">
+        select * from graduate_work_info where graduate_id = #{s_id}
     </select>
     <select id="findAll" resultMap="aaa">
         select * from graduate_info

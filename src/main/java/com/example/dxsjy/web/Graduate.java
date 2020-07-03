@@ -23,7 +23,7 @@ public class Graduate {
     @ApiOperation("查询所有毕业生信息")
     public Message<List<GraduateEX>> findAll() {
         List<GraduateEX> list = graduateService.findAll();
-        return MessageUtil.success();
+        return MessageUtil.success(list);
     }
 
 }
