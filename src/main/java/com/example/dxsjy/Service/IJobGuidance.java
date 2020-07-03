@@ -6,5 +6,7 @@ import java.util.List;
 
 public interface IJobGuidance {
     List<Job_guidance> findAll() throws RuntimeException;
-    void Insert(Job_guidance job_guidance) throws RuntimeException;
+    void InsertOrUpdate(Job_guidance job_guidance) throws RuntimeException;
+
+
 }

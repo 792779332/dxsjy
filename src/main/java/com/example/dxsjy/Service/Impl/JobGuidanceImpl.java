@@ -7,6 +7,7 @@ import com.example.dxsjy.Service.IJobGuidance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -24,8 +25,19 @@ public class JobGuidanceImpl implements IJobGuidance {
     }
 
     @Override
-    public void Insert(Job_guidance job_guidance) throws RuntimeException {
+    public void InsertOrUpdate(Job_guidance job_guidance) throws RuntimeException {
+        Date day=new Date();
+        if (job_guidance.getId()==null){
 
+            //SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            job_guidance.setTime(day);
+            job_guidanceMapper.insert(job_guidance);
+        }
+        else {
+            job_guidance.setTime(day);
+            job_guidanceMapper.updateByPrimaryKey(job_guidance);
+        }
     }
+
 
 }

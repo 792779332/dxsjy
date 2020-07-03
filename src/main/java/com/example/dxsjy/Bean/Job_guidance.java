@@ -1,13 +1,18 @@
 package com.example.dxsjy.Bean;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 import java.util.Date;
 
+@ApiModel
 public class Job_guidance implements Serializable {
     private Integer id;
 
     private String title;
 
+    @ApiModelProperty(hidden = true)
     private Date time;
 
     private String data;
