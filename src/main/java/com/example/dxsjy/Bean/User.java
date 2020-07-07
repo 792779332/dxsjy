@@ -1,8 +1,11 @@
 package com.example.dxsjy.Bean;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 import java.util.Date;
-
+@ApiModel
 public class User implements Serializable {
     private Integer id;
 
@@ -12,6 +15,7 @@ public class User implements Serializable {
 
     private String type;
 
+    @ApiModelProperty(hidden = true)
     private Date date;
 
     private static final long serialVersionUID = 1L;

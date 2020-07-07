@@ -39,5 +39,32 @@ public class JobGuidanceImpl implements IJobGuidance {
         }
     }
 
+    @Override
+    public void deletById(int id) throws RuntimeException {
+        job_guidanceMapper.deleteByPrimaryKey(id);
+
+    }
+
+    @Override
+    public void deletSome(int[] ids) throws RuntimeException {
+        for (int id:ids){
+            job_guidanceMapper.deleteByPrimaryKey(id);
+        }
+    }
+
+    @Override
+    public List<Job_guidance> findByKey(String key) throws RuntimeException {
+        if (key==null)
+            key="";
+        key="%"+key+"%";
+        Job_guidanceExample job_guidanceExample=new Job_guidanceExample();
+        job_guidanceExample.createCriteria().andTitleLike(key);
+
+        List<Job_guidance> list=job_guidanceMapper.selectByExampleWithBLOBs(job_guidanceExample);
+        return list;
+    }
+
+
+
 
 }
