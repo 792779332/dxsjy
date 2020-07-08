@@ -5,8 +5,6 @@ import com.example.dxsjy.Bean.User;
 import com.example.dxsjy.Bean.UserExample;
 import com.example.dxsjy.Mapper.UserMapper;
 import com.example.dxsjy.Service.IUserService;
-import org.apache.commons.collections.bag.SynchronizedSortedBag;
-import org.apache.ibatis.javassist.bytecode.stackmap.BasicBlock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -63,6 +61,50 @@ public class UserServiceImpl implements IUserService {
             return "用户名已存在，请直接登录或更换用户名";
         }
 
+    }
+
+    @Override
+    public String RePassword(int id, int oldpassword, int newpassword, int confirm) throws RuntimeException {
+        User user = userMapper.selectByPrimaryKey(id);
+
+        if (user != null) {
+            if (newpassword == confirm) {
+
+                if (user.getPassword() == oldpassword) {
+                    User user1 = new User();
+                    user1.setId(id);
+                    user1.setPassword(newpassword);
+                    userMapper.updateByPrimaryKeySelective(user1);
+                    return "修改密码成功";
+                } else {
+                    return "旧密码错误请重新输入";
+                }
+
+            } else {
+                return "两次新密码不相同请重新输入新密码";
+            }
+
+
+        }else {
+            return "用户不存在请注册";
+        }
+
+
+    }
+
+    @Override
+    public String ReName(int id, String name) throws RuntimeException {
+        User user=new User();
+        user.setName(name);
+        user.setId(id);
+        userMapper.updateByPrimaryKeySelective(user);
+        return "修改成功";
+    }
+
+    @Override
+    public User FindById(int id) throws RuntimeException {
+        User user=userMapper.selectByPrimaryKey(id);
+        return user;
     }
 
 

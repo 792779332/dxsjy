@@ -56,6 +56,40 @@ public class UserController {
     }
 
 
+    @PostMapping("RePassword")
+    @ApiOperation("修改密码")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id",value = "ID",paramType = "query",dataType = "int",required = true),
+            @ApiImplicitParam(name ="oldpassword",value = "旧密码",paramType = "query",dataType = "int",required = true),
+            @ApiImplicitParam(name = "newpassword",value = "新6位数字密码",paramType = "query",dataType = "int",required = true),
+            @ApiImplicitParam(name = "confirm",value = "确认密码",paramType = "query",dataType = "int",required = true)
+    })
+    public Message RePassword(int id,int oldpassword,int newpassword,int confirm){
+        String s=userService.RePassword(id,oldpassword,newpassword,confirm);
+        return MessageUtil.success(s);
+    }
+
+    @GetMapping("FindById")
+    @ApiOperation("通过id查询")
+    @ApiImplicitParam(name = "id",value = "ID",paramType = "query",dataType = "int",required = true)
+    public Message FindById(int id){
+        User user=userService.FindById(id);
+        return MessageUtil.success(user);
+    }
+
+
+    @PostMapping("ReName")
+    @ApiOperation("修改用户名")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id",value = "ID",paramType = "query",dataType = "int",required = true),
+            @ApiImplicitParam(name = "name",value = "新用户名",paramType = "query",dataType = "String",required = true)
+    })
+    public Message ReName(int id,String name){
+        String s=userService.ReName(id,name);
+        return MessageUtil.success(s);
+    }
+
+
 
 
 }
