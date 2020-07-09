@@ -14,7 +14,7 @@
         <result column="native_place" property="nativePlace"></result>
         <result column="tel" property="tel"></result>
         <result column="QQ" property="qq"></result>
-        <result column="e-mail" property="eMail"></result>
+        <result column="email" property="eMail"></result>
         <result column="postal_code" property="postalCode"></result>
         <result column="address" property="address"></result>
         <result column="self-assessment" property="selfAssessment"></result>

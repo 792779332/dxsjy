@@ -14,7 +14,7 @@
     <result column="native_place" jdbcType="VARCHAR" property="nativePlace" />
     <result column="tel" jdbcType="INTEGER" property="tel" />
     <result column="QQ" jdbcType="INTEGER" property="qq" />
-    <result column="e-mail" jdbcType="VARCHAR" property="eMail" />
+    <result column="email" jdbcType="VARCHAR" property="eMail" />
     <result column="postal_code" jdbcType="INTEGER" property="postalCode" />
     <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="self-assessment" jdbcType="VARCHAR" property="selfAssessment" />
@@ -89,8 +89,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    s_id, user_id1, sname, ssex, country, birth, marital_status, height, ID, native_place, 
-    tel, QQ, e-mail, postal_code, address, self-assessment, graduate_institutions, major, 
+    s_id, user_id1, sname, ssex, country, birth, marital_status, height, ID, native_place,
+    tel, QQ, email, postal_code, address, self-assessment, graduate_institutions, major,
     degree, rank, first_foreign_languages, first_level, second_foreign_languages, second_level
   </sql>
   <sql id="Blob_Column_List">
@@ -127,7 +127,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
-    select 
+    select
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
@@ -145,21 +145,21 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.example.dxsjy.Bean.Graduate">
-    insert into graduate_info (s_id, user_id1, sname, 
-      ssex, country, birth, marital_status, 
-      height, ID, native_place, 
-      tel, QQ, e-mail, postal_code, 
-      address, self-assessment, graduate_institutions, 
-      major, degree, rank, first_foreign_languages, 
-      first_level, second_foreign_languages, second_level, 
+    insert into graduate_info (s_id, user_id1, sname,
+      ssex, country, birth, marital_status,
+      height, ID, native_place,
+      tel, QQ, email, postal_code,
+      address, self-assessment, graduate_institutions,
+      major, degree, rank, first_foreign_languages,
+      first_level, second_foreign_languages, second_level,
       remark)
-    values (#{sId,jdbcType=INTEGER}, #{userId1,jdbcType=INTEGER}, #{sname,jdbcType=VARCHAR}, 
-      #{ssex,jdbcType=CHAR}, #{country,jdbcType=VARCHAR}, #{birth,jdbcType=DATE}, #{maritalStatus,jdbcType=VARCHAR}, 
-      #{height,jdbcType=INTEGER}, #{id,jdbcType=INTEGER}, #{nativePlace,jdbcType=VARCHAR}, 
-      #{tel,jdbcType=INTEGER}, #{qq,jdbcType=INTEGER}, #{eMail,jdbcType=VARCHAR}, #{postalCode,jdbcType=INTEGER}, 
-      #{address,jdbcType=VARCHAR}, #{selfAssessment,jdbcType=VARCHAR}, #{graduateInstitutions,jdbcType=VARCHAR}, 
-      #{major,jdbcType=VARCHAR}, #{degree,jdbcType=VARCHAR}, #{rank,jdbcType=CHAR}, #{firstForeignLanguages,jdbcType=VARCHAR}, 
-      #{firstLevel,jdbcType=CHAR}, #{secondForeignLanguages,jdbcType=VARCHAR}, #{secondLevel,jdbcType=CHAR}, 
+    values (#{sId,jdbcType=INTEGER}, #{userId1,jdbcType=INTEGER}, #{sname,jdbcType=VARCHAR},
+      #{ssex,jdbcType=CHAR}, #{country,jdbcType=VARCHAR}, #{birth,jdbcType=DATE}, #{maritalStatus,jdbcType=VARCHAR},
+      #{height,jdbcType=INTEGER}, #{id,jdbcType=INTEGER}, #{nativePlace,jdbcType=VARCHAR},
+      #{tel,jdbcType=INTEGER}, #{qq,jdbcType=INTEGER}, #{eMail,jdbcType=VARCHAR}, #{postalCode,jdbcType=INTEGER},
+      #{address,jdbcType=VARCHAR}, #{selfAssessment,jdbcType=VARCHAR}, #{graduateInstitutions,jdbcType=VARCHAR},
+      #{major,jdbcType=VARCHAR}, #{degree,jdbcType=VARCHAR}, #{rank,jdbcType=CHAR}, #{firstForeignLanguages,jdbcType=VARCHAR},
+      #{firstLevel,jdbcType=CHAR}, #{secondForeignLanguages,jdbcType=VARCHAR}, #{secondLevel,jdbcType=CHAR},
       #{remark,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.example.dxsjy.Bean.Graduate">
@@ -202,7 +202,7 @@
         QQ,
       </if>
       <if test="eMail != null">
-        e-mail,
+        email,
       </if>
       <if test="postalCode != null">
         postal_code,
@@ -365,7 +365,7 @@
         QQ = #{record.qq,jdbcType=INTEGER},
       </if>
       <if test="record.eMail != null">
-        e-mail = #{record.eMail,jdbcType=VARCHAR},
+        email = #{record.eMail,jdbcType=VARCHAR},
       </if>
       <if test="record.postalCode != null">
         postal_code = #{record.postalCode,jdbcType=INTEGER},
@@ -411,30 +411,30 @@
   <update id="updateByExampleWithBLOBs" parameterType="map">
     update graduate_info
     set s_id = #{record.sId,jdbcType=INTEGER},
-      user_id1 = #{record.userId1,jdbcType=INTEGER},
-      sname = #{record.sname,jdbcType=VARCHAR},
-      ssex = #{record.ssex,jdbcType=CHAR},
-      country = #{record.country,jdbcType=VARCHAR},
-      birth = #{record.birth,jdbcType=DATE},
-      marital_status = #{record.maritalStatus,jdbcType=VARCHAR},
-      height = #{record.height,jdbcType=INTEGER},
-      ID = #{record.id,jdbcType=INTEGER},
-      native_place = #{record.nativePlace,jdbcType=VARCHAR},
-      tel = #{record.tel,jdbcType=INTEGER},
-      QQ = #{record.qq,jdbcType=INTEGER},
-      e-mail = #{record.eMail,jdbcType=VARCHAR},
-      postal_code = #{record.postalCode,jdbcType=INTEGER},
-      address = #{record.address,jdbcType=VARCHAR},
-      self-assessment = #{record.selfAssessment,jdbcType=VARCHAR},
-      graduate_institutions = #{record.graduateInstitutions,jdbcType=VARCHAR},
-      major = #{record.major,jdbcType=VARCHAR},
-      degree = #{record.degree,jdbcType=VARCHAR},
-      rank = #{record.rank,jdbcType=CHAR},
-      first_foreign_languages = #{record.firstForeignLanguages,jdbcType=VARCHAR},
-      first_level = #{record.firstLevel,jdbcType=CHAR},
-      second_foreign_languages = #{record.secondForeignLanguages,jdbcType=VARCHAR},
-      second_level = #{record.secondLevel,jdbcType=CHAR},
-      remark = #{record.remark,jdbcType=LONGVARCHAR}
+    user_id1 = #{record.userId1,jdbcType=INTEGER},
+    sname = #{record.sname,jdbcType=VARCHAR},
+    ssex = #{record.ssex,jdbcType=CHAR},
+    country = #{record.country,jdbcType=VARCHAR},
+    birth = #{record.birth,jdbcType=DATE},
+    marital_status = #{record.maritalStatus,jdbcType=VARCHAR},
+    height = #{record.height,jdbcType=INTEGER},
+    ID = #{record.id,jdbcType=INTEGER},
+    native_place = #{record.nativePlace,jdbcType=VARCHAR},
+    tel = #{record.tel,jdbcType=INTEGER},
+    QQ = #{record.qq,jdbcType=INTEGER},
+    email = #{record.eMail,jdbcType=VARCHAR},
+    postal_code = #{record.postalCode,jdbcType=INTEGER},
+    address = #{record.address,jdbcType=VARCHAR},
+    self-assessment = #{record.selfAssessment,jdbcType=VARCHAR},
+    graduate_institutions = #{record.graduateInstitutions,jdbcType=VARCHAR},
+    major = #{record.major,jdbcType=VARCHAR},
+    degree = #{record.degree,jdbcType=VARCHAR},
+    rank = #{record.rank,jdbcType=CHAR},
+    first_foreign_languages = #{record.firstForeignLanguages,jdbcType=VARCHAR},
+    first_level = #{record.firstLevel,jdbcType=CHAR},
+    second_foreign_languages = #{record.secondForeignLanguages,jdbcType=VARCHAR},
+    second_level = #{record.secondLevel,jdbcType=CHAR},
+    remark = #{record.remark,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -442,29 +442,29 @@
   <update id="updateByExample" parameterType="map">
     update graduate_info
     set s_id = #{record.sId,jdbcType=INTEGER},
-      user_id1 = #{record.userId1,jdbcType=INTEGER},
-      sname = #{record.sname,jdbcType=VARCHAR},
-      ssex = #{record.ssex,jdbcType=CHAR},
-      country = #{record.country,jdbcType=VARCHAR},
-      birth = #{record.birth,jdbcType=DATE},
-      marital_status = #{record.maritalStatus,jdbcType=VARCHAR},
-      height = #{record.height,jdbcType=INTEGER},
-      ID = #{record.id,jdbcType=INTEGER},
-      native_place = #{record.nativePlace,jdbcType=VARCHAR},
-      tel = #{record.tel,jdbcType=INTEGER},
-      QQ = #{record.qq,jdbcType=INTEGER},
-      e-mail = #{record.eMail,jdbcType=VARCHAR},
-      postal_code = #{record.postalCode,jdbcType=INTEGER},
-      address = #{record.address,jdbcType=VARCHAR},
-      self-assessment = #{record.selfAssessment,jdbcType=VARCHAR},
-      graduate_institutions = #{record.graduateInstitutions,jdbcType=VARCHAR},
-      major = #{record.major,jdbcType=VARCHAR},
-      degree = #{record.degree,jdbcType=VARCHAR},
-      rank = #{record.rank,jdbcType=CHAR},
-      first_foreign_languages = #{record.firstForeignLanguages,jdbcType=VARCHAR},
-      first_level = #{record.firstLevel,jdbcType=CHAR},
-      second_foreign_languages = #{record.secondForeignLanguages,jdbcType=VARCHAR},
-      second_level = #{record.secondLevel,jdbcType=CHAR}
+    user_id1 = #{record.userId1,jdbcType=INTEGER},
+    sname = #{record.sname,jdbcType=VARCHAR},
+    ssex = #{record.ssex,jdbcType=CHAR},
+    country = #{record.country,jdbcType=VARCHAR},
+    birth = #{record.birth,jdbcType=DATE},
+    marital_status = #{record.maritalStatus,jdbcType=VARCHAR},
+    height = #{record.height,jdbcType=INTEGER},
+    ID = #{record.id,jdbcType=INTEGER},
+    native_place = #{record.nativePlace,jdbcType=VARCHAR},
+    tel = #{record.tel,jdbcType=INTEGER},
+    QQ = #{record.qq,jdbcType=INTEGER},
+    email = #{record.eMail,jdbcType=VARCHAR},
+    postal_code = #{record.postalCode,jdbcType=INTEGER},
+    address = #{record.address,jdbcType=VARCHAR},
+    self-assessment = #{record.selfAssessment,jdbcType=VARCHAR},
+    graduate_institutions = #{record.graduateInstitutions,jdbcType=VARCHAR},
+    major = #{record.major,jdbcType=VARCHAR},
+    degree = #{record.degree,jdbcType=VARCHAR},
+    rank = #{record.rank,jdbcType=CHAR},
+    first_foreign_languages = #{record.firstForeignLanguages,jdbcType=VARCHAR},
+    first_level = #{record.firstLevel,jdbcType=CHAR},
+    second_foreign_languages = #{record.secondForeignLanguages,jdbcType=VARCHAR},
+    second_level = #{record.secondLevel,jdbcType=CHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -506,7 +506,7 @@
         QQ = #{qq,jdbcType=INTEGER},
       </if>
       <if test="eMail != null">
-        e-mail = #{eMail,jdbcType=VARCHAR},
+        email = #{eMail,jdbcType=VARCHAR},
       </if>
       <if test="postalCode != null">
         postal_code = #{postalCode,jdbcType=INTEGER},
@@ -560,7 +560,7 @@
       native_place = #{nativePlace,jdbcType=VARCHAR},
       tel = #{tel,jdbcType=INTEGER},
       QQ = #{qq,jdbcType=INTEGER},
-      e-mail = #{eMail,jdbcType=VARCHAR},
+      email = #{eMail,jdbcType=VARCHAR},
       postal_code = #{postalCode,jdbcType=INTEGER},
       address = #{address,jdbcType=VARCHAR},
       self-assessment = #{selfAssessment,jdbcType=VARCHAR},
@@ -588,7 +588,7 @@
       native_place = #{nativePlace,jdbcType=VARCHAR},
       tel = #{tel,jdbcType=INTEGER},
       QQ = #{qq,jdbcType=INTEGER},
-      e-mail = #{eMail,jdbcType=VARCHAR},
+      email = #{eMail,jdbcType=VARCHAR},
       postal_code = #{postalCode,jdbcType=INTEGER},
       address = #{address,jdbcType=VARCHAR},
       self-assessment = #{selfAssessment,jdbcType=VARCHAR},

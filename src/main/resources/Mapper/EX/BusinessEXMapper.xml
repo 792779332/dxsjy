@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dxsjy.Mapper.EX.BusinessEXMapper">
+    <resultMap id="123" type="com.example.dxsjy.Bean.EX.BusinessEX">
+        <id column="b_id" property="bId"></id>
+        <result column="user_id" property="userId"></result>
+        <result column="b_name" property="bName"></result>
+        <result column="b_address" property="bAddress"></result>
+        <result column="b_tel" property="bTel"></result>
+        <result column="b_people" property="bPeople"></result>
+        <result column="b_email" property="bEmail"></result>
+        <result column="b_website" property="bWebsite"></result>
+
+
+        <collection property="recruitment"
+                    column="b_id"
+                    select="selectRecruitment"
+                    ofType="com.example.dxsjy.Bean.RecruitmentWithBLOBs">
+
+        </collection>
+
+
+    </resultMap>
+
+
+
+
+
+    <select id="selectRecruitment" resultType="com.example.dxsjy.Bean.RecruitmentWithBLOBs">
+        select * from recruitment_info where b_id = #{b_id}
+    </select>
+
+    <select id="findAll" resultMap="123">
+        select * from business_info
+    </select>
+</mapper>
