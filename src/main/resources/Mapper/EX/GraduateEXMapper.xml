@@ -17,7 +17,7 @@
         <result column="email" property="eMail"></result>
         <result column="postal_code" property="postalCode"></result>
         <result column="address" property="address"></result>
-        <result column="self-assessment" property="selfAssessment"></result>
+        <result column="self_assessment" property="selfAssessment"></result>
         <result column="graduate_institutions" property="graduateInstitutions"></result>
         <result column="major" property="major"></result>
         <result column="degree" property="degree"></result>
