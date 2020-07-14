@@ -7,4 +7,6 @@ import java.util.List;
 public interface BusinessEXMapper {
 
     List<BusinessEX> findAll();
+    BusinessEX findById(int id);
+    List<BusinessEX> selectByKey(String key);
 }

@@ -35,6 +35,12 @@ public class UserController {
 
     @PostMapping("Login")
     @ApiOperation("登录")
+    @ApiImplicitParams({
+
+            @ApiImplicitParam(name ="name",value = "用户名",paramType = "query",dataType = "String",required = true),
+            @ApiImplicitParam(name = "password",value = "6位数字密码",paramType = "query",dataType = "int",required = true),
+
+    })
     public Message Login(String name,int password){
         String s=userService.Login(name,password);
         return MessageUtil.success(s);
@@ -47,7 +53,7 @@ public class UserController {
             @ApiImplicitParam(name = "id",value = "ID",paramType = "query",dataType = "int"),
             @ApiImplicitParam(name ="name",value = "用户名",paramType = "query",dataType = "String",required = true),
             @ApiImplicitParam(name = "password",value = "6位数字密码",paramType = "query",dataType = "int",required = true),
-            @ApiImplicitParam(name = "type",value = "身份",paramType = "query",dataType = "String",required = true)
+            @ApiImplicitParam(name = "type",value = "身份",paramType = "query",dataType = "String",allowableValues="毕业生,用人单位",required = true)
     })
 
     public Message Register(User user){

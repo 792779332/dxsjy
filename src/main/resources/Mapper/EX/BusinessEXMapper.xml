@@ -22,15 +22,37 @@
 
     </resultMap>
 
+    <resultMap id="456" type="com.example.dxsjy.Bean.RecruitmentWithBLOBs">
+        <id column="id" property="id"></id>
+        <result column="b_id" property="bId"></result>
+        <result column="job_name" property="jobName"></result>
+        <result column="work_address" property="workAddress"></result>
+        <result column="rec_number" property="recNumber"></result>
+        <result column="salary" property="salary"></result>
+        <result column="closing_date" property="closingDate"></result>
+        <result column="job_requirement" property="jobRequirement"></result>
+        <result column="Other_treatment" property="otherTreatment"></result>
+        <result column="remarks" property="remarks"></result>
+
+    </resultMap>
 
 
 
 
-    <select id="selectRecruitment" resultType="com.example.dxsjy.Bean.RecruitmentWithBLOBs">
+
+    <select id="selectRecruitment" resultMap="456">
         select * from recruitment_info where b_id = #{b_id}
     </select>
 
     <select id="findAll" resultMap="123">
         select * from business_info
+    </select>
+
+    <select id="findById" resultMap="123">
+        select * from business_info where b_id=#{id}
+    </select>
+
+    <select id="selectByKey" resultMap="123">
+        SELECT * FROM business_info,recruitment_info WHERE business_info.b_id=recruitment_info.b_id AND (recruitment_info.job_name LIKE #{key} OR business_info.b_name LIKE #{key} OR work_address LIKE #{key})
     </select>
 </mapper>

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 
-@RestController
+/*@RestController
 @RequestMapping("/l")
 @Api(description = "练习")
 public class lianxi {
@@ -38,4 +38,4 @@ public class lianxi {
         return MessageUtil.success(list);
     }
 
-}
+}*/

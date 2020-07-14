@@ -8,11 +8,11 @@
     <result column="work_address" jdbcType="VARCHAR" property="workAddress" />
     <result column="rec_number" jdbcType="INTEGER" property="recNumber" />
     <result column="salary" jdbcType="REAL" property="salary" />
-    <result column="closing date" jdbcType="DATE" property="closingDate" />
+    <result column="closing_date" jdbcType="DATE" property="closingDate" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.example.dxsjy.Bean.RecruitmentWithBLOBs">
     <result column="job_requirement" jdbcType="LONGVARCHAR" property="jobRequirement" />
-    <result column="Other treatment" jdbcType="LONGVARCHAR" property="otherTreatment" />
+    <result column="Other_treatment" jdbcType="LONGVARCHAR" property="otherTreatment" />
     <result column="remarks" jdbcType="LONGVARCHAR" property="remarks" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -74,10 +74,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, b_id, job_name, work_address, rec_number, salary, "closing date"
+    id, b_id, job_name, work_address, rec_number, salary, "closing_date"
   </sql>
   <sql id="Blob_Column_List">
-    job_requirement, "Other treatment", remarks
+    job_requirement, "Other_treatment", remarks
   </sql>
   <select id="selectByExampleWithBLOBs" parameterType="com.example.dxsjy.Bean.RecruitmentExample" resultMap="ResultMapWithBLOBs">
     select
@@ -110,7 +110,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
-    select 
+    select
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
@@ -128,13 +128,13 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.example.dxsjy.Bean.RecruitmentWithBLOBs">
-    insert into recruitment_info (id, b_id, job_name, 
-      work_address, rec_number, salary, 
-      "closing date", job_requirement, "Other treatment", 
+    insert into recruitment_info (id, b_id, job_name,
+      work_address, rec_number, salary,
+      closing_date, job_requirement, Other_treatment,
       remarks)
-    values (#{id,jdbcType=INTEGER}, #{bId,jdbcType=INTEGER}, #{jobName,jdbcType=VARCHAR}, 
-      #{workAddress,jdbcType=VARCHAR}, #{recNumber,jdbcType=INTEGER}, #{salary,jdbcType=REAL}, 
-      #{closingDate,jdbcType=DATE}, #{jobRequirement,jdbcType=LONGVARCHAR}, #{otherTreatment,jdbcType=LONGVARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{bId,jdbcType=INTEGER}, #{jobName,jdbcType=VARCHAR},
+      #{workAddress,jdbcType=VARCHAR}, #{recNumber,jdbcType=INTEGER}, #{salary,jdbcType=REAL},
+      #{closingDate,jdbcType=DATE}, #{jobRequirement,jdbcType=LONGVARCHAR}, #{otherTreatment,jdbcType=LONGVARCHAR},
       #{remarks,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.example.dxsjy.Bean.RecruitmentWithBLOBs">
@@ -159,13 +159,13 @@
         salary,
       </if>
       <if test="closingDate != null">
-        "closing date",
+        "closing_date",
       </if>
       <if test="jobRequirement != null">
         job_requirement,
       </if>
       <if test="otherTreatment != null">
-        "Other treatment",
+        "Other_treatment",
       </if>
       <if test="remarks != null">
         remarks,
@@ -232,13 +232,13 @@
         salary = #{record.salary,jdbcType=REAL},
       </if>
       <if test="record.closingDate != null">
-        "closing date" = #{record.closingDate,jdbcType=DATE},
+        "closing_date" = #{record.closingDate,jdbcType=DATE},
       </if>
       <if test="record.jobRequirement != null">
         job_requirement = #{record.jobRequirement,jdbcType=LONGVARCHAR},
       </if>
       <if test="record.otherTreatment != null">
-        "Other treatment" = #{record.otherTreatment,jdbcType=LONGVARCHAR},
+        "Other_treatment" = #{record.otherTreatment,jdbcType=LONGVARCHAR},
       </if>
       <if test="record.remarks != null">
         remarks = #{record.remarks,jdbcType=LONGVARCHAR},
@@ -251,15 +251,15 @@
   <update id="updateByExampleWithBLOBs" parameterType="map">
     update recruitment_info
     set id = #{record.id,jdbcType=INTEGER},
-      b_id = #{record.bId,jdbcType=INTEGER},
-      job_name = #{record.jobName,jdbcType=VARCHAR},
-      work_address = #{record.workAddress,jdbcType=VARCHAR},
-      rec_number = #{record.recNumber,jdbcType=INTEGER},
-      salary = #{record.salary,jdbcType=REAL},
-      "closing date" = #{record.closingDate,jdbcType=DATE},
-      job_requirement = #{record.jobRequirement,jdbcType=LONGVARCHAR},
-      "Other treatment" = #{record.otherTreatment,jdbcType=LONGVARCHAR},
-      remarks = #{record.remarks,jdbcType=LONGVARCHAR}
+    b_id = #{record.bId,jdbcType=INTEGER},
+    job_name = #{record.jobName,jdbcType=VARCHAR},
+    work_address = #{record.workAddress,jdbcType=VARCHAR},
+    rec_number = #{record.recNumber,jdbcType=INTEGER},
+    salary = #{record.salary,jdbcType=REAL},
+    "closing_date" = #{record.closingDate,jdbcType=DATE},
+    job_requirement = #{record.jobRequirement,jdbcType=LONGVARCHAR},
+    "Other_treatment" = #{record.otherTreatment,jdbcType=LONGVARCHAR},
+    remarks = #{record.remarks,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -267,12 +267,12 @@
   <update id="updateByExample" parameterType="map">
     update recruitment_info
     set id = #{record.id,jdbcType=INTEGER},
-      b_id = #{record.bId,jdbcType=INTEGER},
-      job_name = #{record.jobName,jdbcType=VARCHAR},
-      work_address = #{record.workAddress,jdbcType=VARCHAR},
-      rec_number = #{record.recNumber,jdbcType=INTEGER},
-      salary = #{record.salary,jdbcType=REAL},
-      "closing date" = #{record.closingDate,jdbcType=DATE}
+    b_id = #{record.bId,jdbcType=INTEGER},
+    job_name = #{record.jobName,jdbcType=VARCHAR},
+    work_address = #{record.workAddress,jdbcType=VARCHAR},
+    rec_number = #{record.recNumber,jdbcType=INTEGER},
+    salary = #{record.salary,jdbcType=REAL},
+    "closing_date" = #{record.closingDate,jdbcType=DATE}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -296,13 +296,13 @@
         salary = #{salary,jdbcType=REAL},
       </if>
       <if test="closingDate != null">
-        "closing date" = #{closingDate,jdbcType=DATE},
+        "closing_date" = #{closingDate,jdbcType=DATE},
       </if>
       <if test="jobRequirement != null">
         job_requirement = #{jobRequirement,jdbcType=LONGVARCHAR},
       </if>
       <if test="otherTreatment != null">
-        "Other treatment" = #{otherTreatment,jdbcType=LONGVARCHAR},
+        "Other_treatment" = #{otherTreatment,jdbcType=LONGVARCHAR},
       </if>
       <if test="remarks != null">
         remarks = #{remarks,jdbcType=LONGVARCHAR},
@@ -317,9 +317,9 @@
       work_address = #{workAddress,jdbcType=VARCHAR},
       rec_number = #{recNumber,jdbcType=INTEGER},
       salary = #{salary,jdbcType=REAL},
-      "closing date" = #{closingDate,jdbcType=DATE},
+      "closing_date" = #{closingDate,jdbcType=DATE},
       job_requirement = #{jobRequirement,jdbcType=LONGVARCHAR},
-      "Other treatment" = #{otherTreatment,jdbcType=LONGVARCHAR},
+      "Other_treatment" = #{otherTreatment,jdbcType=LONGVARCHAR},
       remarks = #{remarks,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -330,7 +330,7 @@
       work_address = #{workAddress,jdbcType=VARCHAR},
       rec_number = #{recNumber,jdbcType=INTEGER},
       salary = #{salary,jdbcType=REAL},
-      "closing date" = #{closingDate,jdbcType=DATE}
+      "closing_date" = #{closingDate,jdbcType=DATE}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
